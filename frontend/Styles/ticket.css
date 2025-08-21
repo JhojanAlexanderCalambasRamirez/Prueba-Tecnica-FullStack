@@ -1,0 +1,17 @@
+.ticket-card {
+  border: 1px solid #ddd;
+  padding: 8px;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  background: #fff;
+}
+
+.ticket-card strong {
+  display: block;
+  margin-bottom: 6px;
+}
+
+.ticket-card div {
+  font-size: 14px;
+  margin-bottom: 4px;
+}
