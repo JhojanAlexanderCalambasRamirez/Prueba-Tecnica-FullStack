@@ -10,6 +10,7 @@ UI mínima tipo **kanban** para tickets. Permite:
 
 ## Requisitos
 - Node.js 18+ recomendado
+- Vite v5.4.19 
 
 ## Instalación
 

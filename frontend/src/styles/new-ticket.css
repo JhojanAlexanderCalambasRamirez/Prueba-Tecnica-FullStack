@@ -1,0 +1,41 @@
+.new-ticket {
+  padding: 16px;
+}
+
+.new-ticket__form {
+  display: grid;
+  gap: 10px;
+  max-width: 640px;
+}
+
+.new-ticket__form input,
+.new-ticket__form textarea,
+.new-ticket__form select {
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+}
+
+.new-ticket__form textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.new-ticket__buttons {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.new-ticket__buttons button {
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  background: #f6f7f9;
+  cursor: pointer;
+}
+
+.new-ticket__buttons button:hover {
+  background: #eceff3;
+}

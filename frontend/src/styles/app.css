@@ -1,0 +1,38 @@
+.app {
+  padding: 16px;
+}
+
+.app__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.app__title {
+  margin: 0;
+  font-size: 22px;
+}
+
+.app__brand {
+  text-decoration: none;
+  color: inherit;
+}
+
+.app__nav {
+  display: flex;
+  gap: 12px;
+}
+
+.app__nav a {
+  text-decoration: none;
+  color: #1976d2;
+  font-weight: 600;
+}
+
+.app__nav a:hover {
+  text-decoration: underline;
+}
+
+.app__main {
+  margin-top: 12px;
+}

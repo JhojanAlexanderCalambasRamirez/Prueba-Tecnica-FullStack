@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { transitionTicket, addTicketComment } from "../api/tickets";
+import "../styles/ticket-card.css"; // ⬅️ importa el CSS separado
 
 const PRIORITY_LABELS = { baja: "Baja", media: "Media", alta: "Alta" };
 const NEXTS = {
@@ -41,36 +42,33 @@ export default function TicketCard({ ticket, onChanged, onOpen }) {
   }
 
   return (
-    <div style={{
-      border: "1px solid #ddd", padding: 10, borderRadius: 10, marginBottom: 10,
-      background: "#fff"
-    }}>
-      <div style={{ display: "flex", justifyContent: "space-between" }}>
-        <strong style={{ cursor: "pointer" }} onClick={() => onOpen?.(ticket.id)}>
+    <div className="ticket-card">
+      <div className="ticket-card__header">
+        <strong className="ticket-card__title" onClick={() => onOpen?.(ticket.id)}>
           {ticket.title}
         </strong>
-        <span style={{ fontSize: 12, opacity: .7 }}>
+        <span className="ticket-card__date">
           {new Date(ticket.created_at).toLocaleString()}
         </span>
       </div>
 
-      <div style={{ fontSize: 13, margin: "6px 0" }}>
+      <div className="ticket-card__meta">
         <div><b>Prioridad:</b> {PRIORITY_LABELS[ticket.priority]}</div>
         <div><b>Estado:</b> {ticket.status.replace("_", " ")}</div>
-        <div style={{ opacity: .8 }}>
+        <div className="ticket-card__reporter">
           <b>Reportado por:</b> {ticket.reporter_name}
           {ticket.reporter_email ? ` · ${ticket.reporter_email}` : ""}
         </div>
       </div>
-      
+
       {NEXTS[ticket.status].length > 0 && (
-        <div style={{ display: "flex", gap: 6, flexWrap: "wrap", marginTop: 6 }}>
+        <div className="ticket-card__actions">
           {NEXTS[ticket.status].map((n) => (
             <button
               key={n}
               disabled={busy}
               onClick={() => doTransition(n)}
-              style={{ padding: "6px 10px", borderRadius: 8, border: "1px solid #ccc", background: "#f6f7f9" }}
+              className="ticket-card__btn"
             >
               → {n.replace("_", " ")}
             </button>
@@ -78,15 +76,18 @@ export default function TicketCard({ ticket, onChanged, onOpen }) {
         </div>
       )}
 
-      {/* Comentario rápido */}
-      <form onSubmit={submitComment} style={{ marginTop: 8, display: "flex", gap: 6 }}>
+      <form onSubmit={submitComment} className="ticket-card__comment-form">
         <input
           value={comment}
           onChange={(e) => setComment(e.target.value)}
           placeholder="Añadir comentario…"
-          style={{ flex: 1, padding: 6, borderRadius: 8, border: "1px solid #ddd" }}
+          className="ticket-card__comment-input"
         />
-        <button disabled={busy || !comment.trim()} style={{ padding: "6px 10px", borderRadius: 8 }}>
+        <button
+          disabled={busy || !comment.trim()}
+          className="ticket-card__btn"
+          type="submit"
+        >
           Comentar
         </button>
       </form>

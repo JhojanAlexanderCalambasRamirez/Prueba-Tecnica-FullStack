@@ -4,6 +4,7 @@ import {
   deleteTicket, deleteComment, updateTicket
 } from "../api/tickets";
 import { useNavigate, useParams } from "react-router-dom";
+import "../styles/ticket-detail.css"; // ⬅️ CSS separado
 
 const NEXTS = {
   nuevo: ["en_proceso"],
@@ -31,7 +32,6 @@ export default function TicketDetail() {
       setTicket(t);
       const cs = await listComments(id);
       setComments(cs);
-      // Inicializa campos de edición
       setEditDesc(t.description || "");
       setEditPriority(t.priority || "media");
     } catch (e) {
@@ -68,80 +68,98 @@ export default function TicketDetail() {
     await load();
   }
 
-  if (!ticket) return <div style={{ padding: 16 }}>Cargando…</div>;
+  if (!ticket) return <div className="ticket-detail__loading">Cargando…</div>;
 
   return (
-    <div style={{ padding: 16, maxWidth: 900 }}>
-      <div style={{ display: "flex", gap: 8, marginBottom: 12 }}>
-        <button onClick={() => navigate(-1)}>← Volver</button>
-        <button onClick={handleDeleteTicket} style={{ color: "white", background: "crimson", border: "1px solid crimson" }}>
-          Eliminar ticket
-        </button>
+    <div className="ticket-detail">
+      <div className="ticket-detail__actions">
+        <button className="btn" onClick={() => navigate(-1)}>← Volver</button>
+        <button className="btn btn--danger" onClick={handleDeleteTicket}>Eliminar ticket</button>
       </div>
 
-      <h2 style={{ marginTop: 0 }}>{ticket.title}</h2>
-      <p><b>Estado:</b> {ticket.status.replace("_", " ")} · <b>Prioridad:</b> {ticket.priority}</p>
-      <p><b>Solicitante:</b> {ticket.reporter_name} {ticket.reporter_email ? `· ${ticket.reporter_email}` : ""}</p>
-      <p><b>Descripción actual:</b><br />{ticket.description}</p>
+      <h2 className="ticket-detail__title">{ticket.title}</h2>
+      <p className="ticket-detail__meta">
+        <b>Estado:</b> {ticket.status.replace("_", " ")} · <b>Prioridad:</b> {ticket.priority}
+      </p>
+      <p className="ticket-detail__meta">
+        <b>Solicitante:</b> {ticket.reporter_name} {ticket.reporter_email ? `· ${ticket.reporter_email}` : ""}
+      </p>
+      <p className="ticket-detail__desc">
+        <b>Descripción actual:</b><br />{ticket.description}
+      </p>
 
-      {/* Transiciones */}
       {NEXTS[ticket.status].length > 0 && (
-        <div style={{ display: "flex", gap: 6, margin: "10px 0" }}>
+        <div className="ticket-detail__transitions">
           {NEXTS[ticket.status].map(n => (
-            <button key={n} onClick={() => doTransition(n)}>→ {n.replace("_", " ")}</button>
+            <button key={n} className="btn btn--light" onClick={() => doTransition(n)}>
+              → {n.replace("_", " ")}
+            </button>
           ))}
         </div>
       )}
 
-      <hr />
+      <hr className="ticket-detail__separator" />
 
-      {/* Editar */}
       <h3>Editar ticket</h3>
-      <form onSubmit={saveEdits} style={{ display: "grid", gap: 8, maxWidth: 700 }}>
-        <textarea value={editDesc} onChange={(e)=>setEditDesc(e.target.value)} rows={4} />
-        <select value={editPriority} onChange={(e)=>setEditPriority(e.target.value)}>
+      <form onSubmit={saveEdits} className="ticket-detail__form">
+        <textarea
+          value={editDesc}
+          onChange={(e)=>setEditDesc(e.target.value)}
+          rows={4}
+          className="input input--textarea"
+        />
+        <select
+          value={editPriority}
+          onChange={(e)=>setEditPriority(e.target.value)}
+          className="input"
+        >
           <option value="baja">Baja</option>
           <option value="media">Media</option>
           <option value="alta">Alta</option>
         </select>
         <div>
-          <button type="submit">Guardar cambios</button>
+          <button type="submit" className="btn">Guardar cambios</button>
         </div>
       </form>
 
-      <hr />
+      <hr className="ticket-detail__separator" />
 
-      {/* Comentarios */}
       <h3>Comentarios</h3>
-      <form onSubmit={submitComment} style={{ display: "flex", gap: 6, marginBottom: 10 }}>
-        <input value={comment} onChange={(e)=>setComment(e.target.value)} placeholder="Escribe un comentario…" style={{ flex: 1 }} />
-        <button disabled={!comment.trim()}>Agregar</button>
+      <form onSubmit={submitComment} className="ticket-detail__comment-form">
+        <input
+          value={comment}
+          onChange={(e)=>setComment(e.target.value)}
+          placeholder="Escribe un comentario…"
+          className="input ticket-detail__comment-input"
+        />
+        <button disabled={!comment.trim()} className="btn">Agregar</button>
       </form>
 
-      {loading && <p>Cargando…</p>}
-      <ul>
+      {loading && <p className="ticket-detail__loading">Cargando…</p>}
+
+      <ul className="ticket-detail__comments">
         {comments.map(c => (
-          <li key={c.id} style={{ marginBottom: 6 }}>
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+          <li key={c.id} className="ticket-detail__comment">
+            <div className="ticket-detail__comment-row">
               <div>
-                <b>{c.author}</b> · <span style={{ opacity: .7 }}>{new Date(c.created_at).toLocaleString()}</span>
+                <b>{c.author}</b> · <span className="muted">{new Date(c.created_at).toLocaleString()}</span>
                 <br />{c.text}
               </div>
               <button
-                onClick={async () => { 
-                  if (confirm("¿Eliminar comentario?")) { 
-                    await deleteComment(c.id); 
+                className="btn btn--light"
+                onClick={async () => {
+                  if (confirm("¿Eliminar comentario?")) {
+                    await deleteComment(c.id);
                     await load();
                   }
                 }}
-                style={{ marginLeft: 8 }}
               >
                 Eliminar
               </button>
             </div>
           </li>
         ))}
-        {comments.length === 0 && <p style={{ opacity: .7 }}>Sin comentarios</p>}
+        {comments.length === 0 && <p className="muted">Sin comentarios</p>}
       </ul>
     </div>
   );

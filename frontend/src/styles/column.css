@@ -1,0 +1,14 @@
+.column {
+  min-width: 280px;
+  margin-right: 12px;
+}
+
+.column__title {
+  margin-top: 0;
+  margin-bottom: 8px;
+}
+
+.column__empty {
+  opacity: 0.65;
+  margin: 6px 0 0;
+}
