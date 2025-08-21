@@ -1,0 +1,129 @@
+ENDPOINTS:
+
+Healthcheck
+GET http://127.0.0.1:8000/health/
+Verifica que el servidor esté arriba.
+
+
+200 OK
+
+ { "status": "ok" }
+
+Tickets
+## 1 Listar tickets (con paginación, filtros y búsqueda):--------------------------------------------------------------------------------------------
+
+GET http://127.0.0.1:8000/api/tickets/
+
+200 OK 
+{
+  "count": 1,
+  "next": null,
+  "previous": null,
+  "results": [
+    {
+      "id": 1,
+      "title": "Error en login",
+      "description": "El login falla con usuarios nuevos",
+      "priority": "alta",
+      "reporter_name": "Laura",
+      "reporter_email": "laura@test.com",
+      "status": "nuevo",
+      "created_at": "2025-08-21T16:00:00Z",
+      "updated_at": "2025-08-21T16:00:00Z",
+      "comments": []
+    }
+  ]
+}
+
+## 2 Crear ticket:-----------------------------------------------------------------------------------------------------------------------------
+
+POST http://127.0.0.1:8000/api/tickets/
+ Headers: Content-Type: application/json
+ Body (JSON):
+{
+  "title": "Error en login",
+  "description": "El login falla con usuarios nuevos",
+  "priority": "alta",
+  "reporter_name": "Laura",
+  "reporter_email": "laura@test.com"
+}
+
+201 Created → devuelve el ticket creado.
+ 400 Bad Request si faltan campos obligatorios o valores inválidos.
+
+## 3 Obtener detalle de un ticket:------------------------------------------------------------------------------------------------------------
+
+GET http://127.0.0.1:8000/api/tickets/{id}/
+ 200 OK → ticket por id.
+ 404 Not Found si no existe.
+
+## 4 Actualizar ticket:---------------------------------------------------------------------------------------------------------------------
+
+PATCH http://127.0.0.1:8000/api/tickets/{id}/
+ Headers: Content-Type: application/json
+ Body (ejemplos, envía solo lo que quieras cambiar):
+{ "description": "Descripción actualizada" }
+
+o
+{ "priority": "media" }
+
+200 OK → ticket actualizado.
+ 400 si el valor no es válido.
+ 404 si no existe.
+También existe PUT para reemplazo total del recurso si lo necesitas:
+ PUT http://127.0.0.1:8000/api/tickets/{id}/
+
+## 5 Eliminar ticket:------------------------------------------------------------------------------------------------------------------------------
+
+DELETE http://127.0.0.1:8000/api/tickets/{id}/
+ 204 No Content si se elimina.
+ 404 Not Found si no existe.
+
+## 6 Transición de estado (flujo controlado):------------------------------------------------------------------------------------------------------
+
+POST http://127.0.0.1:8000/api/tickets/{id}/transition/
+ Headers: Content-Type: application/json
+ Body (JSON):
+{ "next_status": "en_proceso" }
+
+200 OK → ticket con estado actualizado.
+ 400 Bad Request si la transición es inválida (ej. nuevo → resuelto).
+ 404 Not Found si no existe el ticket.
+Comentarios
+
+## 7 Agregar comentario a un ticket:---------------------------------------------------------------------------------------------------------------
+
+POST http://127.0.0.1:8000/api/tickets/{id}/comments/
+ Headers: Content-Type: application/json
+ Body (JSON):
+{
+  "author": "Mesa de Ayuda",
+  "text": "Estamos revisando el caso."
+}
+
+201 Created: comentario creado (con id, ticket, author, text, created_at).
+ 400: si falta text.
+ 404: si no existe el ticket.
+
+## 8 Listar comentarios (por ticket):---------------------------------------------------------------------------------------------------------------
+
+GET http://127.0.0.1:8000/api/comments/?ticket={id}
+Ejemplo: http://127.0.0.1:8000/api/comments/?ticket=1
+ 200 OK →
+
+
+[
+  {
+    "id": 10,
+    "ticket": 1,
+    "author": "Mesa de Ayuda",
+    "text": "Estamos revisando el caso.",
+    "created_at": "2025-08-21T16:10:00Z"
+  }
+]
+
+## 9 Eliminar comentario------------------------------------------------------------------------------------------------------------------
+
+DELETE http://127.0.0.1:8000/api/comments/{comment_id}/
+ 204 No Content al eliminar.
+ 404 Not Found si no existe.
