@@ -1,52 +1,59 @@
+/*
+Este archivo CSS define los estilos para el componente `TicketCard`,
+que representa un ticket individual en el tablero.
+*/
+
 .ticket {
-  border: 1px solid #000000;
-  padding: 10px;
-  border-radius: 10px;
-  margin-bottom: 10px;
-  background: #fff;
-  box-shadow: 0 1px 0 rgba(0,0,0,.02);
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  border: 1px solid #000000; /* Borde sólido negro alrededor de la tarjeta. */
+  padding: 10px; /* Relleno interno. */
+  border-radius: 10px; /* Esquinas redondeadas. */
+  margin-bottom: 10px; /* Margen inferior para separar las tarjetas. */
+  background: #fff; /* Color de fondo blanco. */
+  box-shadow: 0 1px 0 rgba(0,0,0,.02); /* Sombra sutil para un efecto de elevación. */
+  transition: transform 0.15s ease, box-shadow 0.15s ease; /* Transición suave para efectos hover. */
 }
 
 .ticket:hover {
-  transform: scale(1.01);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+  transform: scale(1.01); /* Aumenta ligeramente el tamaño de la tarjeta al pasar el ratón. */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12); /* Aumenta la intensidad de la sombra al pasar el ratón. */
 }
 
 .ticket__head {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
+  display: flex; /* Utiliza Flexbox para el encabezado de la tarjeta. */
+  align-items: center; /* Centra los elementos verticalmente. */
+  justify-content: space-between; /* Distribuye el espacio entre el título y las acciones. */
+  gap: 8px; /* Espacio entre los elementos del encabezado. */
 }
 
 .ticket__title {
-  font-weight: 700;
-  background: none;
-  border: none;
-  padding: 0;
-  color: #111827;
-  cursor: pointer;
-  text-align: left;
+  font-weight: 700; /* Texto en negrita. */
+  background: none; /* Elimina el fondo. */
+  border: none; /* Elimina el borde. */
+  padding: 0; /* Elimina el relleno. */
+  color: #111827; /* Color de texto oscuro. */
+  cursor: pointer; /* Muestra un cursor de "mano". */
+  text-align: left; /* Alinea el texto a la izquierda. */
 }
-.ticket__title:hover { text-decoration: underline; }
+.ticket__title:hover {
+  text-decoration: underline; /* Subraya el título al pasar el ratón. */
+}
 
 .ticket__actions {
   display: flex;
-  gap: 6px;
+  gap: 6px; /* Espacio entre los botones de acción. */
 }
 
 .ticket__icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+  display: inline-flex; /* Utiliza Flexbox para el icono y su contenedor. */
+  align-items: center; /* Centra el icono verticalmente. */
+  justify-content: center; /* Centra el icono horizontalmente. */
   width: 50px;
   height: 30px;
   border-radius: 6px;
   border: 1px solid #baafaf;
   background: #f9fafb;
   cursor: pointer;
-  transition: transform .12s ease, background .12s ease, border-color .12s ease;
+  transition: transform .12s ease, background .12s ease, border-color .12s ease; /* Transiciones para efectos hover. */
 }
 .ticket__icon:hover {
   transform: scale(1.1);
@@ -54,7 +61,7 @@
   border-color: #cbd5e1;
 }
 .ticket__icon--danger {
-  color: #b91c1c;
+  color: #b91c1c; /* Color de texto rojo para indicar peligro (eliminar). */
   border-color: #f3d1d1;
   background: #fff5f5;
 }
@@ -63,16 +70,26 @@
   border-color: #fca5a5;
 }
 
-.ticket__meta { margin-top: 4px; }
-.ticket__date { font-size: 12px; opacity: .7; }
+.ticket__meta {
+  margin-top: 4px; /* Margen superior para los metadatos. */
+}
+.ticket__date {
+  font-size: 12px;
+  opacity: .7; /* Reduce la opacidad para que el texto sea menos prominente. */
+}
 
-.ticket__info { font-size: 13px; margin: 6px 0; }
-.ticket__reporter { opacity: .8; }
+.ticket__info {
+  font-size: 13px;
+  margin: 6px 0;
+}
+.ticket__reporter {
+  opacity: .8; /* Reduce la opacidad del nombre del solicitante. */
+}
 
 .ticket__transitions {
   display: flex;
   gap: 6px;
-  flex-wrap: wrap;
+  flex-wrap: wrap; /* Permite que los botones de transición se envuelvan. */
   margin-top: 6px;
 }
 
@@ -83,7 +100,10 @@
   background: #f6f7f9;
   cursor: pointer;
 }
-.ticket__btn:disabled { opacity: .6; cursor: not-allowed; }
+.ticket__btn:disabled {
+  opacity: .6;
+  cursor: not-allowed; /* Muestra un cursor de "no permitido" cuando el botón está deshabilitado. */
+}
 
 .ticket__comment {
   margin-top: 8px;
@@ -91,7 +111,7 @@
   gap: 6px;
 }
 .ticket__input {
-  flex: 1;
+  flex: 1; /* Permite que el input ocupe todo el espacio disponible. */
   padding: 6px;
   border-radius: 8px;
   border: 1px solid #000000;

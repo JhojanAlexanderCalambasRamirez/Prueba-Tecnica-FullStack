@@ -1,54 +1,71 @@
+/*
+Este archivo CSS define los estilos para el componente `StatusBar`,
+que se utiliza para mostrar mensajes de estado, como carga, éxito o error.
+*/
+
 .status {
-  position: sticky;
-  top: 0;
-  z-index: 30;
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  padding: 10px 12px;
-  border-radius: 8px;
-  margin: 8px 0 12px;
-  font-weight: 600;
-  border: 1px solid transparent;
-  box-shadow: 0 2px 8px rgba(0,0,0,.06);
+  position: sticky; /* Hace que el elemento se "pegue" en la parte superior de la ventana al hacer scroll. */
+  top: 0; /* Lo fija en la parte superior. */
+  z-index: 30; /* Asegura que el StatusBar esté por encima de otros elementos. */
+  display: flex; /* Utiliza Flexbox para alinear el contenido. */
+  gap: 10px; /* Espacio de 10px entre los elementos internos. */
+  align-items: center; /* Centra los elementos verticalmente. */
+  padding: 10px 12px; /* Relleno interno. */
+  border-radius: 8px; /* Esquinas redondeadas. */
+  margin: 8px 0 12px; /* Margen superior e inferior. */
+  font-weight: 600; /* Texto en seminegrita. */
+  border: 1px solid transparent; /* Borde inicial transparente para evitar saltos de diseño. */
+  box-shadow: 0 2px 8px rgba(0,0,0,.06); /* Sombra sutil para un efecto de elevación. */
 }
 
+/* Estilos para el estado de carga (loading) */
 .status--loading {
-  background: #f3f4f6;
-  color: #111827;
-  border-color: #e5e7eb;
+  background: #f3f4f6; /* Color de fondo gris claro. */
+  color: #111827; /* Color de texto oscuro. */
+  border-color: #e5e7eb; /* Color de borde. */
 }
 
+/* Estilos para el estado de éxito (success) */
 .status--success {
-  background: #ecfdf5;
-  color: #065f46;
-  border-color: #a7f3d0;
+  background: #ecfdf5; /* Color de fondo verde claro. */
+  color: #065f46; /* Color de texto verde oscuro. */
+  border-color: #a7f3d0; /* Color de borde verde. */
 }
 
+/* Estilos para el estado de error (error) */
 .status--error {
-  background: #fef2f2;
-  color: #991b1b;
-  border-color: #fecaca;
+  background: #fef2f2; /* Color de fondo rojo claro. */
+  color: #991b1b; /* Color de texto rojo oscuro. */
+  border-color: #fecaca; /* Color de borde rojo. */
 }
 
 .status__spinner {
   width: 16px;
   height: 16px;
-  border: 2px solid #9ca3af;
-  border-top-color: transparent;
-  border-radius: 50%;
+  border: 2px solid #9ca3af; /* Borde del spinner. */
+  border-top-color: transparent; /* Hace que la parte superior del borde sea transparente para el efecto de giro. */
+  border-radius: 50%; /* Crea una forma circular. */
   display: inline-block;
-  animation: spin 0.9s linear infinite;
+  animation: spin 0.9s linear infinite; /* Aplica la animación de giro. */
 }
 
-@keyframes spin { to { transform: rotate(360deg); } }
+/* Definición de la animación de giro */
+@keyframes spin {
+  to {
+    transform: rotate(360deg); /* Gira el elemento 360 grados. */
+  }
+}
 
-.status__icon { font-size: 16px; }
-.status__msg { flex: 1; }
+.status__icon {
+  font-size: 16px;
+}
+.status__msg {
+  flex: 1; /* Permite que el mensaje ocupe todo el espacio disponible. */
+}
 .status__close {
   border: 0;
   background: transparent;
   font-size: 16px;
   cursor: pointer;
-  line-height: 1;
+  line-height: 1; /* Asegura que la altura de la línea no afecte el tamaño del botón. */
 }

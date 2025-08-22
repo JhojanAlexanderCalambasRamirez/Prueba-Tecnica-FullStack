@@ -1,17 +1,22 @@
+/*
+Este archivo CSS define los estilos para el componente `TicketCard`.
+Se utiliza para mostrar una vista resumida de un ticket en el tablero.
+*/
+
 .ticket-card {
-  border: 1px solid #ddd;
-  padding: 8px;
-  border-radius: 8px;
-  margin-bottom: 8px;
-  background: #fff;
+  border: 1px solid #ddd; /* Establece un borde gris claro. */
+  padding: 8px; /* Relleno interno para crear espacio alrededor del contenido. */
+  border-radius: 8px; /* Aplica esquinas redondeadas. */
+  margin-bottom: 8px; /* Margen en la parte inferior para separar cada tarjeta. */
+  background: #fff; /* Fondo blanco para la tarjeta. */
 }
 
 .ticket-card strong {
-  display: block;
-  margin-bottom: 6px;
+  display: block; /* Muestra el elemento como un bloque para que ocupe toda la línea. */
+  margin-bottom: 6px; /* Margen inferior para separar el título del resto del contenido. */
 }
 
 .ticket-card div {
-  font-size: 14px;
-  margin-bottom: 4px;
+  font-size: 14px; /* Tamaño de la fuente para la información del ticket. */
+  margin-bottom: 4px; /* Margen inferior para separar las diferentes líneas de información. */
 }

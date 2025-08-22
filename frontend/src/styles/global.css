@@ -1,29 +1,33 @@
+/*
+Este archivo CSS define los estilos globales de la página.
+Afecta a elementos como el cuerpo del documento, los títulos y los botones.
+*/
+
 body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  background: #f4f4f4;
-  color: #333;
-  padding: 16px;
+  font-family: Arial, sans-serif; /* Define la fuente principal para toda la página. */
+  margin: 0; /* Elimina el margen por defecto del cuerpo del documento. */
+  background: #f4f4f4; /* Establece un color de fondo gris claro para la página. */
+  color: #333; /* Define un color de texto oscuro por defecto. */
+  padding: 16px; /* Agrega un espaciado interno de 16px al cuerpo del documento. */
 }
 
 h1 {
-  margin-bottom: 12px;
+  margin-bottom: 12px; /* Agrega un margen inferior de 12px a los títulos de nivel 1. */
 }
 
 h2 {
-  margin: 16px 0 8px 0;
+  margin: 16px 0 8px 0; /* Define un margen superior, inferior y lateral para los títulos de nivel 2. */
 }
 
 button {
-  cursor: pointer;
-  border: none;
-  padding: 6px 12px;
-  border-radius: 6px;
-  background: #ffffff;
-  color: #000000;
+  cursor: pointer; /* Cambia el cursor a un puntero al pasar sobre los botones. */
+  border: none; /* Elimina el borde por defecto de los botones. */
+  padding: 6px 12px; /* Define el relleno interno de los botones. */
+  border-radius: 6px; /* Aplica esquinas redondeadas a los botones. */
+  background: #ffffff; /* Establece un color de fondo blanco para los botones. */
+  color: #000000; /* Define el color del texto de los botones. */
 }
 
-
 button:hover {
-  background: #dbdbdb;
+  background: #dbdbdb; /* Cambia el color de fondo del botón a un gris más oscuro al pasar el ratón. */
 }

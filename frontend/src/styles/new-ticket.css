@@ -1,39 +1,44 @@
+/*
+Este archivo CSS define los estilos para el formulario de creación de nuevos tickets.
+*/
+
 .new-ticket {
-  display: flex;
-  flex-direction: column;
-  align-items: center;   
-  padding: 40px 16px;   
-  box-sizing: border-box;
-  text-align: center;
+  display: flex; /* Utiliza Flexbox para organizar el contenido. */
+  flex-direction: column; /* Organiza los elementos en una columna. */
+  align-items: center; /* Centra los elementos horizontalmente. */
+  padding: 40px 16px; /* Espaciado interno superior/inferior de 40px y lateral de 16px. */
+  box-sizing: border-box; /* Asegura que el relleno y el borde se incluyan en el ancho y alto total. */
+  text-align: center; /* Centra el texto dentro del contenedor. */
 }
 .new-ticket__form {
-  display: grid;
-  gap: 10px;
-  max-width: 640px;
-  width: 100%;           
-  margin: 20px auto 0;      
-  text-align: left;     
+  display: grid; /* Utiliza Grid para la disposición de los elementos del formulario. */
+  gap: 10px; /* Espacio de 10 píxeles entre los elementos del formulario. */
+  max-width: 640px; /* Ancho máximo para el formulario. */
+  width: 100%; /* Asegura que el formulario ocupe el 100% del ancho disponible (hasta el `max-width`). */
+  margin: 20px auto 0; /* Centra el formulario horizontalmente y agrega un margen superior. */
+  text-align: left; /* Alinea el texto de los campos de formulario a la izquierda. */
 }
 
+/* Estilos para los campos de entrada, áreas de texto y selectores. */
 .new-ticket__form input,
 .new-ticket__form textarea,
 .new-ticket__form select {
-  padding: 8px;
-  border-radius: 6px;
-  border: 1px solid #000000;
-  font-size: 14px;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  padding: 8px; /* Espaciado interno. */
+  border-radius: 6px; /* Esquinas redondeadas. */
+  border: 1px solid #000000; /* Borde sólido. */
+  font-size: 14px; /* Tamaño de la fuente. */
+  transition: transform 0.2s ease, box-shadow 0.2s ease; /* Transición suave para efectos hover. */
 }
 
 .new-ticket__form textarea {
-  resize: vertical;
-  min-height: 80px;
+  resize: vertical; /* Permite que el usuario cambie el tamaño solo verticalmente. */
+  min-height: 80px; /* Altura mínima para el área de texto. */
 }
 
 .new-ticket__buttons {
-  display: flex;
-  gap: 8px;
-  justify-content: center;
+  display: flex; /* Utiliza Flexbox para los botones. */
+  gap: 8px; /* Espacio entre los botones. */
+  justify-content: center; /* Centra los botones horizontalmente. */
 }
 
 .new-ticket__buttons button {
@@ -45,20 +50,21 @@
 }
 
 .new-ticket__buttons button:hover {
-  background: #e7e7e7;
+  background: #e7e7e7; /* Cambia el color de fondo al pasar el ratón. */
 }
 
+/* Efectos hover para los campos del formulario. */
 .new-ticket__form input:hover,
 .new-ticket__form textarea:hover,
 .new-ticket__form select:hover {
-  transform: scale(1.001);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  transform: scale(1.001); /* Pequeña escala para un efecto visual. */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15); /* Sombra para resaltar el campo. */
 }
 
 .ticket__transitions {
   display: flex;
-  justify-content: center;  
-  align-items: center;       
+  justify-content: center;
+  align-items: center;
   gap: 6px;
   flex-wrap: wrap;
   margin-top: 10px;

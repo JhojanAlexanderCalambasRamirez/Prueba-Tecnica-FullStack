@@ -1,12 +1,17 @@
+/*
+Este archivo CSS define los estilos para la página principal del tablero de tickets,
+incluyendo la disposición de las columnas, los filtros y los estilos generales de los tickets.
+*/
+
 :root {
-  --border: #d0d0d0;   
-  --bg: #ffffff;      
-  --radius: 10px;      
-  --space-3: 5px;    
+  --border: #d0d0d0; /* Variable CSS para el color del borde. */
+  --bg: #ffffff; /* Variable CSS para el color de fondo. */
+  --radius: 10px; /* Variable CSS para el radio de las esquinas. */
+  --space-3: 5px; /* Variable CSS para un espaciado pequeño. */
 }
 
 .board {
-  padding: 1px;
+  padding: 1px; /* Pequeño relleno alrededor del tablero. */
 }
 
 .board__title {
@@ -15,15 +20,15 @@
 }
 
 .board__filters {
-  display: flex;
-  gap: 8px;
-  margin-bottom: 12px;
-  flex-wrap: wrap;
+  display: flex; /* Utiliza Flexbox para organizar los elementos de los filtros en una fila. */
+  gap: 8px; /* Espacio de 8 píxeles entre los elementos de los filtros. */
+  margin-bottom: 12px; /* Margen inferior para separar los filtros de las columnas. */
+  flex-wrap: wrap; /* Permite que los elementos se envuelvan a la siguiente línea si no hay suficiente espacio. */
 }
 
 .board__search {
-  flex: 2;
-  min-width: 220px;
+  flex: 2; /* Permite que el campo de búsqueda ocupe más espacio que los otros elementos. */
+  min-width: 220px; /* Ancho mínimo para el campo de búsqueda. */
   padding: 8px;
   border-radius: 8px;
   border: 1px solid #000000;
@@ -40,11 +45,11 @@
   border-radius: 8px;
   border: 1px solid #000000;
   background: #ffffff;
-  cursor: pointer;
+  cursor: pointer; /* Muestra un cursor de "mano" al pasar sobre el botón. */
 }
 
 .board__button:hover {
-  background: #eceff3;
+  background: #eceff3; /* Cambia el color de fondo al pasar el ratón. */
 }
 
 .board__loading {
@@ -52,25 +57,23 @@
 }
 
 .board__columns {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(280px, 1fr));
-  gap: 0; 
+  display: grid; /* Utiliza Grid para la disposición de las columnas. */
+  grid-template-columns: repeat(4, minmax(280px, 1fr)); /* Crea 4 columnas con un ancho mínimo de 280px y un ancho flexible. */
+  gap: 0; /* No hay espacio entre las columnas, el espaciado se manejará con los bordes. */
   border: 0.5px solid var(--border);
   border-radius: var(--radius);
-  overflow: hidden;
+  overflow: hidden; /* Oculta cualquier contenido que se desborde del contenedor (para las esquinas redondeadas). */
   background: transparent;
   border: 1px solid #000000;
-  
 }
 
 .board__columns > .column {
   padding: var(--space-3);
   background: var(--bg);
-  border-right: 3px solid var(--border); /*esto para la linea entre las columnas, entre mayor sea el numero, mas gruesa va a ser*/
+  /* Define un borde derecho para crear la línea divisoria entre columnas. */
+  border-right: 3px solid var(--border);
 }
-
 
 .board__columns > .column:last-child {
-  border-right: none;
+  border-right: none; /* Elimina el borde derecho de la última columna para evitar una línea extra al final. */
 }
-

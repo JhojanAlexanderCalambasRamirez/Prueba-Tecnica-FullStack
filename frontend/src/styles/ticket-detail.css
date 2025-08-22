@@ -1,33 +1,88 @@
-.page-pad { padding: 16px; }
+/*
+Este archivo CSS define los estilos para la página de detalle de un ticket.
+*/
 
-.ticket-detail__actions {
-  display: flex;
-  gap: 8px;
-  margin-bottom: 12px;
+.page-pad {
+  padding: 16px; /* Define un relleno uniforme para el contenido de la página. */
 }
 
-.ticket-detail__title { margin: 0 0 4px 0; }
+.ticket-detail__actions {
+  display: flex; /* Utiliza Flexbox para organizar los botones de acción. */
+  gap: 8px; /* Espacio de 8 píxeles entre los botones. */
+  margin-bottom: 12px; /* Margen inferior para separarlos del título. */
+}
+
+.ticket-detail__title {
+  margin: 0 0 4px 0; /* Define el margen superior, lateral y un pequeño margen inferior. */
+}
 
 .ticket-detail__transitions {
-  display: flex; gap: 6px; flex-wrap: wrap; margin: 10px 0;
+  display: flex;
+  gap: 6px; /* Espacio de 6 píxeles entre los botones de transición de estado. */
+  flex-wrap: wrap; /* Permite que los botones se envuelvan a la siguiente línea si no hay suficiente espacio. */
+  margin: 10px 0; /* Margen superior e inferior para separarlos del contenido. */
 }
 
 .ticket-detail__edit-form {
-  display: grid; gap: 8px; max-width: 700px;
+  display: grid; /* Utiliza Grid para la disposición del formulario de edición. */
+  gap: 8px; /* Espacio de 8 píxeles entre los campos. */
+  max-width: 700px; /* Ancho máximo para el formulario. */
 }
 
 .ticket-detail__comment-form {
-  display: flex; gap: 6px; margin-bottom: 10px; max-width: 700px;
+  display: flex; /* Utiliza Flexbox para el formulario de comentarios. */
+  gap: 6px;
+  margin-bottom: 10px;
+  max-width: 700px;
 }
 
-.ticket-detail__comments { list-style: none; padding-left: 0; max-width: 700px; }
-.ticket-detail__comment { margin-bottom: 8px; border-bottom: 1px solid #eee; padding-bottom: 8px; }
-.ticket-detail__comment-row { display: flex; justify-content: space-between; align-items: center; }
+.ticket-detail__comments {
+  list-style: none; /* Elimina los marcadores de la lista. */
+  padding-left: 0; /* Elimina el relleno izquierdo por defecto de la lista. */
+  max-width: 700px; /* Ancho máximo para la lista de comentarios. */
+}
+.ticket-detail__comment {
+  margin-bottom: 8px; /* Margen inferior para separar los comentarios. */
+  border-bottom: 1px solid #eee; /* Línea divisoria entre comentarios. */
+  padding-bottom: 8px; /* Relleno inferior para la línea. */
+}
+.ticket-detail__comment-row {
+  display: flex; /* Utiliza Flexbox para el contenido de cada comentario. */
+  justify-content: space-between; /* Alinea el contenido y el botón de eliminación en los extremos. */
+  align-items: center; /* Centra los elementos verticalmente. */
+}
 
-.input { padding: 8px; border-radius: 8px; border: 1px solid #ddd; font: inherit; }
-.label { font-weight: 600; }
-.btn { padding: 6px 10px; border-radius: 8px; border: 1px solid #606060; background: #f9f6f6; font: inherit; cursor: pointer; }
-.btn--danger { background: crimson; border-color: rgb(71, 71, 71); color: #fff; }
-.btn--danger:hover { background: rgb(153, 17, 17); }
-.btn:disabled { opacity: .55; cursor: not-allowed; }
-.muted { opacity: .7; font-size: 12px; }
+/* Estilos de utilidad reutilizables */
+.input {
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  font: inherit; /* Hereda las propiedades de fuente del elemento padre. */
+}
+.label {
+  font-weight: 600; /* Texto en seminegrita. */
+}
+.btn {
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 1px solid #606060;
+  background: #f9f6f6;
+  font: inherit;
+  cursor: pointer;
+}
+.btn--danger {
+  background: crimson;
+  border-color: rgb(71, 71, 71);
+  color: #fff;
+}
+.btn--danger:hover {
+  background: rgb(153, 17, 17);
+}
+.btn:disabled {
+  opacity: .55; /* Reduce la opacidad cuando el botón está deshabilitado. */
+  cursor: not-allowed; /* Muestra un cursor de "no permitido". */
+}
+.muted {
+  opacity: .7; /* Reduce la opacidad del texto. */
+  font-size: 12px;
+}

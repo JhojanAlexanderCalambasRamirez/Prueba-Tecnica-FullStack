@@ -1,16 +1,21 @@
+/*
+Este archivo CSS define los estilos para el componente 'Column'
+que se utiliza en el tablero de tickets para agrupar las tarjetas.
+*/
+
 .column {
-  min-width: 280px;
-  margin-right: 0;    
-  box-sizing: border-box;
-  text-align: center;
+  min-width: 280px; /* Establece un ancho mínimo para cada columna para evitar que se contraigan demasiado. */
+  margin-right: 0; /* Elimina el margen derecho por defecto, el espaciado entre columnas se maneja en el componente `board__columns`. */
+  box-sizing: border-box; /* Asegura que el relleno y el borde se incluyan en el ancho y alto total del elemento. */
+  text-align: center; /* Centra el texto dentro de la columna. */
 }
 
 .column__title {
-  margin-top: 0;
-  margin-bottom: 8px;
+  margin-top: 0; /* Elimina el margen superior por defecto del título. */
+  margin-bottom: 8px; /* Agrega un margen inferior para separar el título de las tarjetas de tickets. */
 }
 
 .column__empty {
-  opacity: 0.65;
-  margin: 6px 0 0;
+  opacity: 0.65; /* Reduce la opacidad del mensaje "Sin tickets" para que sea menos prominente. */
+  margin: 6px 0 0; /* Agrega un pequeño margen superior para el mensaje. */
 }

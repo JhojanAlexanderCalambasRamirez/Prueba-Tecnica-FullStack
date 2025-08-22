@@ -1,56 +1,59 @@
+/*
+Este archivo CSS define los estilos principales para la estructura
+general de la aplicación, incluyendo el encabezado, el cuerpo y el pie de página.
+*/
+
 .app {
-  padding: 16px;
+  padding: 16px; /* Define un espaciado interno de 16 píxeles en todos los lados del contenedor principal. */
 }
 
 .app__header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
+  display: flex; /* Utiliza Flexbox para el contenedor del encabezado. */
+  justify-content: space-between; /* Distribuye el espacio entre los elementos, enviando el título a la izquierda y la navegación a la derecha. */
+  align-items: center; /* Centra los elementos verticalmente. */
 }
 
 .app__title {
-  margin: 0;
-  font-size: 22px;
-  
+  margin: 0; /* Elimina el margen por defecto del encabezado. */
+  font-size: 22px; /* Establece el tamaño de la fuente para el título. */
 }
 
 .app__brand {
-  color: inherit;
-  transition: transform 0.25s ease, color 0.25s ease;
-  display: inline-block; 
-  text-decoration: underline;
+  color: inherit; /* Hereda el color del texto de su elemento padre (el `h1`). */
+  transition: transform 0.25s ease, color 0.25s ease; /* Aplica una transición suave a las propiedades 'transform' y 'color'. */
+  display: inline-block; /* Permite que se aplique la transformación (escala). */
+  text-decoration: underline; /* Subraya el texto. */
 }
 
 .app__brand:hover {
-  transform: scale(1.08);
+  transform: scale(1.08); /* Aumenta ligeramente el tamaño del texto al pasar el ratón. */
 }
 
 .app__nav {
-  display: flex;
-  gap: 12px;
+  display: flex; /* Utiliza Flexbox para el contenedor de navegación. */
+  gap: 12px; /* Establece un espacio de 12 píxeles entre los enlaces. */
 }
 
 .app__nav a {
-  color: #000000;
-  font-weight: 600;
-  transition: transform 0.2s ease, color 0.2s ease;
+  color: #000000; /* Define el color del texto de los enlaces. */
+  font-weight: 600; /* Hace que el texto sea seminegrita. */
+  transition: transform 0.2s ease, color 0.2s ease; /* Aplica una transición suave a las propiedades 'transform' y 'color'. */
 }
 
 .app__nav a:hover {
-  transform: scale(1.1);
-  text-decoration: underline;
+  transform: scale(1.1); /* Aumenta ligeramente el tamaño de los enlaces al pasar el ratón. */
+  text-decoration: underline; /* Subraya los enlaces al pasar el ratón. */
 }
 
 .app__main {
-  margin-top: 12px;
+  margin-top: 12px; /* Agrega un margen superior de 12 píxeles al contenedor principal del contenido. */
 }
 
 footer {
-  opacity: 0.1;
-  margin-top: 12px;
-  padding: 12px;
-  text-align: center;
-  font-size: 13px;
-  color: #888888;
+  opacity: 0.1; /* Hace que el pie de página sea semitransparente. */
+  margin-top: 12px; /* Agrega un margen superior de 12 píxeles. */
+  padding: 12px; /* Agrega un espaciado interno. */
+  text-align: center; /* Centra el texto. */
+  font-size: 13px; /* Reduce el tamaño de la fuente. */
+  color: #888888; /* Define un color de texto gris. */
 }
