@@ -1,5 +1,5 @@
 :root {
-  --border: #e5e7eb;   
+  --border: #d0d0d0;   
   --bg: #ffffff;      
   --radius: 10px;      
   --space-3: 5px;    
@@ -59,6 +59,8 @@
   border-radius: var(--radius);
   overflow: hidden;
   background: transparent;
+  border: 1px solid #000000;
+  
 }
 
 .board__columns > .column {

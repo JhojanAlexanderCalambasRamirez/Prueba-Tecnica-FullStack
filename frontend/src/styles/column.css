@@ -2,6 +2,7 @@
   min-width: 280px;
   margin-right: 0;    
   box-sizing: border-box;
+  text-align: center;
 }
 
 .column__title {
