@@ -11,6 +11,17 @@ from .models import Ticket
 
 class TicketAPITest(TestCase):
     def setUp(self):
+        self.client = APIClient()
+        self.ticket = Ticket.objects.create(
+            title="Error de prueba",
+            description="Pantalla azul",
+            priority=Ticket.Priority.HIGH,
+            reporter_name="Tester0",
+            reporter_email="tester0@gmail.com",
+        )
+
+class TicketAPITest(TestCase):
+    def setUp(self):
 
         # Configuración inicial para cada test:
         # - Se crea un cliente API (self.client) para enviar requests.
@@ -77,3 +88,12 @@ class TicketAPITest(TestCase):
             format="json",
         )
         self.assertEqual(r.status_code, status.HTTP_400_BAD_REQUEST)
+
+    def test_en_proceso_no_puede_volver_a_nuevo(self):
+        # Pasar a en_proceso
+        r1 = self.client.post(f"/api/tickets/{self.ticket.id}/transition/", {"next_status": "en_proceso"}, format="json")
+        self.assertEqual(r1.status_code, status.HTTP_200_OK)
+
+        # Intentar volver a nuevo (debe fallar)
+        r2 = self.client.post(f"/api/tickets/{self.ticket.id}/transition/", {"next_status": "nuevo"}, format="json")
+        self.assertEqual(r2.status_code, status.HTTP_400_BAD_REQUEST)
