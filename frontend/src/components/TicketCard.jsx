@@ -5,7 +5,7 @@ import "../styles/ticket-card.css";
 const PRIORITY_LABELS = { baja: "Baja", media: "Media", alta: "Alta" };
 const NEXTS = {
   nuevo: ["en_proceso"],
-  en_proceso: ["nuevo", "resuelto"],
+  en_proceso: ["resuelto"],
   resuelto: ["cerrado"],
   cerrado: [],
 };

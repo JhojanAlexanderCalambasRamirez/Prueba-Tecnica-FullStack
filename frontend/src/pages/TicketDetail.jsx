@@ -13,7 +13,7 @@ import "../styles/ticket-detail.css";
 
 const NEXTS = {
   nuevo: ["en_proceso"],
-  en_proceso: ["nuevo", "resuelto"],
+  en_proceso: ["resuelto"],
   resuelto: ["cerrado"],
   cerrado: [],
 };
