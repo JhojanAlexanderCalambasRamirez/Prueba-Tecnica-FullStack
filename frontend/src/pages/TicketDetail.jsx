@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from "react";
 import {
-  addTicketComment, getTicket, listComments, transitionTicket,
-  deleteTicket, deleteComment, updateTicket
+  addTicketComment,
+  getTicket,
+  listComments,
+  transitionTicket,
+  deleteTicket,
+  deleteComment,
+  updateTicket,
 } from "../api/tickets";
 import { useNavigate, useParams } from "react-router-dom";
 import "../styles/ticket-detail.css";
@@ -12,6 +17,7 @@ const NEXTS = {
   resuelto: ["cerrado"],
   cerrado: [],
 };
+
 export default function TicketDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -21,10 +27,10 @@ export default function TicketDetail() {
   const [loading, setLoading] = useState(false);
   const [busy, setBusy] = useState(false);
 
-  const [comment, setComment] = useState("");
-
   const [editDesc, setEditDesc] = useState("");
   const [editPriority, setEditPriority] = useState("media");
+
+  const [comment, setComment] = useState("");
 
   async function load() {
     try {
@@ -42,7 +48,9 @@ export default function TicketDetail() {
     }
   }
 
-  useEffect(() => { load(); }, [id]);
+  useEffect(() => {
+    load();
+  }, [id]);
 
   async function doTransition(next) {
     try {
@@ -59,7 +67,10 @@ export default function TicketDetail() {
   async function submitComment(e) {
     e.preventDefault();
     const text = comment.trim();
-    if (!text) return;
+    if (!text) {
+      alert("Escribe un comentario");
+      return;
+    }
     try {
       setBusy(true);
       await addTicketComment(id, { author: "Frontend", text });
@@ -73,7 +84,8 @@ export default function TicketDetail() {
   }
 
   async function handleDeleteTicket() {
-    if (!confirm("¿Eliminar este ticket? Esta acción no se puede deshacer.")) return;
+    if (!confirm("¿Eliminar este ticket? Esta acción no se puede deshacer."))
+      return;
     try {
       setBusy(true);
       await deleteTicket(id);
@@ -98,111 +110,132 @@ export default function TicketDetail() {
     }
   }
 
-  if (!ticket) return <div className="ticket-detail__loading">Cargando…</div>;
+  if (!ticket) return <div className="page-pad">Cargando…</div>;
 
   return (
-    <div className="ticket-detail">
+    <div className="ticket-detail page-pad">
       <div className="ticket-detail__actions">
-        <button className="btn" onClick={() => navigate(-1)} disabled={busy}>← Volver</button>
-        <button className="btn btn--danger" onClick={handleDeleteTicket} disabled={busy}>
+        <button className="btn" onClick={() => navigate(-1)} disabled={busy}>
+          Volver
+        </button>
+        <button
+          className="btn btn--danger"
+          onClick={handleDeleteTicket}
+          disabled={busy}
+        >
           Eliminar ticket
         </button>
       </div>
 
       <h2 className="ticket-detail__title">{ticket.title}</h2>
-      <p className="ticket-detail__meta">
-        <b>Estado:</b> {ticket.status.replace("_", " ")} · <b>Prioridad:</b> {ticket.priority}
+      <p className="muted">
+        Creado: {new Date(ticket.created_at).toLocaleString()} · Última act.:{" "}
+        {new Date(ticket.updated_at).toLocaleString()}
       </p>
-      <p className="ticket-detail__meta">
-        <b>Solicitante:</b> {ticket.reporter_name} {ticket.reporter_email ? `· ${ticket.reporter_email}` : ""}
+
+      <p>
+        <b>Estado:</b> {ticket.status.replace("_", " ")} · <b>Prioridad:</b>{" "}
+        {ticket.priority}
       </p>
-      <p className="ticket-detail__desc">
-        <b>Descripción actual:</b><br />{ticket.description}
+      <p>
+        <b>Solicitante:</b> {ticket.reporter_name}
+        {ticket.reporter_email ? ` · ${ticket.reporter_email}` : ""}
+      </p>
+      <p>
+        <b>Descripción actual:</b>
+        <br />
+        {ticket.description}
       </p>
 
       {NEXTS[ticket.status].length > 0 && (
         <div className="ticket-detail__transitions">
-          {NEXTS[ticket.status].map(n => (
-            <button key={n} className="btn btn--light" onClick={() => doTransition(n)} disabled={busy}>
+          {NEXTS[ticket.status].map((n) => (
+            <button
+              key={n}
+              className="btn"
+              onClick={() => doTransition(n)}
+              disabled={busy}
+            >
               → {n.replace("_", " ")}
             </button>
           ))}
         </div>
       )}
 
-      <hr className="ticket-detail__separator" />
+      <hr />
 
       <h3>Editar ticket</h3>
-      <form onSubmit={saveEdits} className="ticket-detail__form">
+      <form onSubmit={saveEdits} className="ticket-detail__edit-form">
+        <label className="label">Descripción</label>
         <textarea
-          value={editDesc}
-          onChange={(e)=>setEditDesc(e.target.value)}
-          rows={4}
-          className="input input--textarea"
-          disabled={busy}
-        />
-        <select
-          value={editPriority}
-          onChange={(e)=>setEditPriority(e.target.value)}
           className="input"
-          disabled={busy}
+          rows={4}
+          value={editDesc}
+          onChange={(e) => setEditDesc(e.target.value)}
+        />
+        <label className="label">Prioridad</label>
+        <select
+          className="input"
+          value={editPriority}
+          onChange={(e) => setEditPriority(e.target.value)}
         >
           <option value="baja">Baja</option>
           <option value="media">Media</option>
           <option value="alta">Alta</option>
         </select>
         <div>
-          <button type="submit" className="btn" disabled={busy}>Guardar cambios</button>
+          <button type="submit" className="btn" disabled={busy}>
+            Guardar cambios
+          </button>
         </div>
       </form>
 
-      <hr className="ticket-detail__separator" />
+      <hr />
 
       <h3>Comentarios</h3>
       <form onSubmit={submitComment} className="ticket-detail__comment-form">
         <input
+          className="input"
           value={comment}
-          onChange={(e)=>setComment(e.target.value)}
+          onChange={(e) => setComment(e.target.value)}
           placeholder="Escribe un comentario…"
-          className="input ticket-detail__comment-input"
-          disabled={false}
+          disabled={busy}
         />
-        <button disabled={false || !comment.trim()} className="btn">Agregar</button>
+        <button className="btn" disabled={busy}>
+          Agregar comentario
+        </button>
       </form>
 
-      {loading && <p className="ticket-detail__loading">Cargando…</p>}
+      {loading && <p>Cargando…</p>}
 
       <ul className="ticket-detail__comments">
-        {comments.map(c => (
+        {comments.map((c) => (
           <li key={c.id} className="ticket-detail__comment">
             <div className="ticket-detail__comment-row">
               <div>
-                <b>{c.author}</b> · <span className="muted">{new Date(c.created_at).toLocaleString()}</span>
-                <br />{c.text}
+                <b>{c.author}</b>{" "}
+                <span className="muted">
+                  {new Date(c.created_at).toLocaleString()}
+                </span>
+                <br />
+                {c.text}
               </div>
               <button
-                className="btn btn--light"
-                disabled={busy}
+                className="btn btn--danger"
                 onClick={async () => {
                   if (confirm("¿Eliminar comentario?")) {
-                    try {
-                      setBusy(true);
-                      await deleteComment(c.id);
-                      await load();
-                    } catch (e) {
-                      alert(e?.response?.data?.detail || e.message);
-                    } finally {
-                      setBusy(false);
-                    }
+                    await deleteComment(c.id);
+                    await load();
                   }
                 }}
+                disabled={busy}
               >
-                Eliminar
+                Eliminar comentario
               </button>
             </div>
           </li>
         ))}
-        {comments.length === 0 && <p className="muted">Sin comentarios</p>}
+        {comments.length === 0 && <p className="muted">Sin comentarios, agrega uno</p>}
       </ul>
     </div>
   );

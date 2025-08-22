@@ -19,19 +19,19 @@
   min-width: 220px;
   padding: 8px;
   border-radius: 8px;
-  border: 1px solid #ddd;
+  border: 1px solid #000000;
 }
 
 .board__select {
   padding: 8px;
   border-radius: 8px;
-  border: 1px solid #ddd;
+  border: 1px solid #000000;
 }
 
 .board__button {
   padding: 8px 12px;
   border-radius: 8px;
-  border: 1px solid #ddd;
+  border: 1px solid #000000;
   background: #ffffff;
   cursor: pointer;
 }
@@ -44,14 +44,28 @@
   margin: 8px 0;
 }
 
-.board__columns {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(280px, 1fr));
-  gap: 12px;
+.board__columns{
+  display:grid;
+  grid-template-columns:repeat(4, minmax(280px,1fr));
+  gap:0; 
+  background:var(--border);
+  border-radius:var(--radius);
+  overflow:hidden;
 }
+
+.board__columns > .column{
+  padding:var(--space-3);
+  background:var(--bg);
+  border-right:1px solid var(--border);
+}
+
+.board__columns > .column:last-child{
+  border-right:none;
+}
+
 
 .board__separator {
   margin: 16px 0;
   border: none;
-  border-top: 1px solid #e5e7eb;
+  border-top: 1px solid #000000;
 }

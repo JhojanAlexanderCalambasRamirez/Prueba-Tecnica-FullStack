@@ -37,14 +37,13 @@ export default function Board() {
   }, [tickets]);
 
   function openDetail(id) {
-    navigate(`/ticket/${id}`);
+    navigate(`/tickets/${id}`);
   }
 
   return (
     <div className="board">
       <h2 className="board__title">Tablero</h2>
 
-      {/* Filtros */}
       <div className="board__filters">
         <input
           placeholder="Buscar por título…"

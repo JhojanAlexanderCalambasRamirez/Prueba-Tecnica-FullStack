@@ -25,7 +25,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Board />} />
           <Route path="/new" element={<NewTicket />} />
-          <Route path="/ticket/:id" element={<TicketDetail />} />
+          <Route path="/tickets/:id" element={<TicketDetail />} />
         </Routes>
       </main>
     </div>
