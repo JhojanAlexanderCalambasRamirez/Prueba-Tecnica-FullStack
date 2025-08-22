@@ -24,7 +24,7 @@ export default function TicketCard({ ticket, onChanged, onError, onOpen, onDelet
     try {
       setBusy(true);
       await transitionTicket(ticket.id, next);
-      onChanged?.(`Ticket #${ticket.id}: estado → ${prettyStatus(next)}`);
+      onChanged?.(`Ticket #${ticket.id}: estado ${prettyStatus(next)}`);
     } catch (e) {
       onError?.(e?.response?.data?.detail || e.message);
     } finally {
