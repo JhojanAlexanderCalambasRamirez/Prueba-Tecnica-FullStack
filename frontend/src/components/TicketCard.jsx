@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { transitionTicket, addTicketComment } from "../api/tickets";
-import "../styles/ticket-card.css"; // ⬅️ importa el CSS separado
+import "../styles/ticket-card.css"; 
 
 const PRIORITY_LABELS = { baja: "Baja", media: "Media", alta: "Alta" };
 const NEXTS = {

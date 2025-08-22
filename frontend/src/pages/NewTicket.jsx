@@ -1,7 +1,7 @@
 import React from "react";
 import { createTicket } from "../api/tickets";
 import { useNavigate } from "react-router-dom";
-import "../styles/new-ticket.css"; // ⬅️ importamos CSS separado
+import "../styles/new-ticket.css"; 
 
 export default function NewTicket() {
   const navigate = useNavigate();

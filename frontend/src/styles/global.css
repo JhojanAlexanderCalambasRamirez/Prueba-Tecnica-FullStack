@@ -28,10 +28,10 @@ button {
   border: none;
   padding: 6px 12px;
   border-radius: 6px;
-  background: #1976d2;
-  color: white;
+  background: #ffffff;
+  color: #000000;
 }
 
 button:hover {
-  background: #125ea2;
+  background: #dbdbdb;
 }

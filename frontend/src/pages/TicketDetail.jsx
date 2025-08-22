@@ -4,7 +4,7 @@ import {
   deleteTicket, deleteComment, updateTicket
 } from "../api/tickets";
 import { useNavigate, useParams } from "react-router-dom";
-import "../styles/ticket-detail.css"; // ⬅️ CSS separado
+import "../styles/ticket-detail.css";
 
 const NEXTS = {
   nuevo: ["en_proceso"],
@@ -12,16 +12,17 @@ const NEXTS = {
   resuelto: ["cerrado"],
   cerrado: [],
 };
-
 export default function TicketDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
+
   const [ticket, setTicket] = useState(null);
   const [comments, setComments] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [busy, setBusy] = useState(false);
+
   const [comment, setComment] = useState("");
 
-  // Edición
   const [editDesc, setEditDesc] = useState("");
   const [editPriority, setEditPriority] = useState("media");
 
@@ -44,28 +45,57 @@ export default function TicketDetail() {
   useEffect(() => { load(); }, [id]);
 
   async function doTransition(next) {
-    await transitionTicket(id, next);
-    await load();
+    try {
+      setBusy(true);
+      await transitionTicket(id, next);
+      await load();
+    } catch (e) {
+      alert(e?.response?.data?.detail || e.message);
+    } finally {
+      setBusy(false);
+    }
   }
 
   async function submitComment(e) {
     e.preventDefault();
-    if (!comment.trim()) return;
-    await addTicketComment(id, { author: "Frontend", text: comment.trim() });
-    setComment("");
-    await load();
+    const text = comment.trim();
+    if (!text) return;
+    try {
+      setBusy(true);
+      await addTicketComment(id, { author: "Frontend", text });
+      setComment("");
+      await load();
+    } catch (e) {
+      alert(e?.response?.data?.detail || e.message);
+    } finally {
+      setBusy(false);
+    }
   }
 
   async function handleDeleteTicket() {
     if (!confirm("¿Eliminar este ticket? Esta acción no se puede deshacer.")) return;
-    await deleteTicket(id);
-    navigate("/");
+    try {
+      setBusy(true);
+      await deleteTicket(id);
+      navigate("/");
+    } catch (e) {
+      alert(e?.response?.data?.detail || e.message);
+    } finally {
+      setBusy(false);
+    }
   }
 
   async function saveEdits(e) {
     e.preventDefault();
-    await updateTicket(id, { description: editDesc, priority: editPriority });
-    await load();
+    try {
+      setBusy(true);
+      await updateTicket(id, { description: editDesc, priority: editPriority });
+      await load();
+    } catch (e) {
+      alert(e?.response?.data?.detail || e.message);
+    } finally {
+      setBusy(false);
+    }
   }
 
   if (!ticket) return <div className="ticket-detail__loading">Cargando…</div>;
@@ -73,8 +103,10 @@ export default function TicketDetail() {
   return (
     <div className="ticket-detail">
       <div className="ticket-detail__actions">
-        <button className="btn" onClick={() => navigate(-1)}>← Volver</button>
-        <button className="btn btn--danger" onClick={handleDeleteTicket}>Eliminar ticket</button>
+        <button className="btn" onClick={() => navigate(-1)} disabled={busy}>← Volver</button>
+        <button className="btn btn--danger" onClick={handleDeleteTicket} disabled={busy}>
+          Eliminar ticket
+        </button>
       </div>
 
       <h2 className="ticket-detail__title">{ticket.title}</h2>
@@ -91,7 +123,7 @@ export default function TicketDetail() {
       {NEXTS[ticket.status].length > 0 && (
         <div className="ticket-detail__transitions">
           {NEXTS[ticket.status].map(n => (
-            <button key={n} className="btn btn--light" onClick={() => doTransition(n)}>
+            <button key={n} className="btn btn--light" onClick={() => doTransition(n)} disabled={busy}>
               → {n.replace("_", " ")}
             </button>
           ))}
@@ -107,18 +139,20 @@ export default function TicketDetail() {
           onChange={(e)=>setEditDesc(e.target.value)}
           rows={4}
           className="input input--textarea"
+          disabled={busy}
         />
         <select
           value={editPriority}
           onChange={(e)=>setEditPriority(e.target.value)}
           className="input"
+          disabled={busy}
         >
           <option value="baja">Baja</option>
           <option value="media">Media</option>
           <option value="alta">Alta</option>
         </select>
         <div>
-          <button type="submit" className="btn">Guardar cambios</button>
+          <button type="submit" className="btn" disabled={busy}>Guardar cambios</button>
         </div>
       </form>
 
@@ -131,8 +165,9 @@ export default function TicketDetail() {
           onChange={(e)=>setComment(e.target.value)}
           placeholder="Escribe un comentario…"
           className="input ticket-detail__comment-input"
+          disabled={false}
         />
-        <button disabled={!comment.trim()} className="btn">Agregar</button>
+        <button disabled={false || !comment.trim()} className="btn">Agregar</button>
       </form>
 
       {loading && <p className="ticket-detail__loading">Cargando…</p>}
@@ -147,10 +182,18 @@ export default function TicketDetail() {
               </div>
               <button
                 className="btn btn--light"
+                disabled={busy}
                 onClick={async () => {
                   if (confirm("¿Eliminar comentario?")) {
-                    await deleteComment(c.id);
-                    await load();
+                    try {
+                      setBusy(true);
+                      await deleteComment(c.id);
+                      await load();
+                    } catch (e) {
+                      alert(e?.response?.data?.detail || e.message);
+                    } finally {
+                      setBusy(false);
+                    }
                   }
                 }}
               >

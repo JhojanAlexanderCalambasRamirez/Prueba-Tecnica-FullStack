@@ -3,7 +3,7 @@ import { listTickets } from "../api/tickets";
 import Column from "../components/Column";
 import TicketCard from "../components/TicketCard";
 import { useNavigate } from "react-router-dom";
-import "../styles/board.css"; // ⬅️ CSS separado
+import "../styles/board.css"; 
 
 export default function Board() {
   const [tickets, setTickets] = useState([]);

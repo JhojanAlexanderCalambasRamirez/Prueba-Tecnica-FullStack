@@ -13,12 +13,9 @@ export const addTicketComment = (id, payload) =>
   client.post(`/tickets/${id}/comments/`, payload);
 export const listComments = (ticketId) =>
   client.get(`/comments/`, { params: { ticket: ticketId } });
-
 export const deleteTicket = (id) =>
   client.delete(`/tickets/${id}/`);
-
 export const deleteComment = (commentId) =>
   client.delete(`/comments/${commentId}/`);
-
 export const updateTicket = (id, payload) =>
   client.patch(`/tickets/${id}/`, payload);
