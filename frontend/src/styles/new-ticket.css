@@ -1,11 +1,18 @@
 .new-ticket {
-  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;   
+  padding: 40px 16px;   
+  box-sizing: border-box;
+  text-align: center;
 }
-
 .new-ticket__form {
   display: grid;
   gap: 10px;
   max-width: 640px;
+  width: 100%;           
+  margin: 20px auto 0;      
+  text-align: left;     
 }
 
 .new-ticket__form input,
@@ -26,7 +33,7 @@
 .new-ticket__buttons {
   display: flex;
   gap: 8px;
-  justify-content: flex-end;
+  justify-content: center;
 }
 
 .new-ticket__buttons button {
@@ -46,4 +53,13 @@
 .new-ticket__form select:hover {
   transform: scale(1.001);
   box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.ticket__transitions {
+  display: flex;
+  justify-content: center;  
+  align-items: center;       
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: 10px;
 }

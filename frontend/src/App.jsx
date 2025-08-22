@@ -1,11 +1,14 @@
 import React from "react";
-import { Link, Route, Routes } from "react-router-dom";
+import { Link, Route, Routes, useLocation } from "react-router-dom";
 import Board from "./pages/Board";
 import NewTicket from "./pages/NewTicket";
 import TicketDetail from "./pages/TicketDetail";
 import "./styles/app.css";
 
 export default function App() {
+  const location = useLocation();            // <- saber en qué ruta estamos
+  const isOnNew = location.pathname === "/new";
+
   return (
     <div className="app">
       <header className="app__header">
@@ -16,7 +19,7 @@ export default function App() {
         </h1>
 
         <nav className="app__nav">
-          <Link to="/new">+ Crear ticket</Link>
+          {!isOnNew && <Link to="/new">+ Crear ticket</Link>}
         </nav>
       </header>
 
@@ -30,12 +33,17 @@ export default function App() {
 
       <footer>
         <p>
-          © 2025 <a href="https://github.com/JhojanAlexanderCalambasRamirez/Prueba-Tecnica-FullStack" target="_blank" rel="noopener noreferrer">
+          © 2025{" "}
+          <a
+            href="https://github.com/JhojanAlexanderCalambasRamirez/Prueba-Tecnica-FullStack"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             Developer Alexander Calambas
-          </a> – Todos los derechos reservados.
+          </a>{" "}
+          – Todos los derechos reservados.
         </p>
       </footer>
     </div>
-    
   );
 }
