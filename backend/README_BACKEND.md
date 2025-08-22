@@ -1,3 +1,11 @@
+# Repositorio Github:
+
+- https://github.com/JhojanAlexanderCalambasRamirez/Prueba-Tecnica-FullStack
+
+# Video Youtube:
+
+- https://youtu.be/K54ODLy_ZGQ
+
 # Backend (Django + DRF):
 
 Este módulo implementa la API REST para la gestión de tickets de soporte técnico. 
@@ -82,4 +90,7 @@ python manage.py migrate
   - Semillas: `python manage.py seed_helpdesk` 
   - Superusuario: `python manage.py createsuperuser` 
 
+# Mockups
+
+Ruta: docs\Mockups-capturas
 

@@ -1,3 +1,11 @@
+# Repositorio Github:
+
+- https://github.com/JhojanAlexanderCalambasRamirez/Prueba-Tecnica-FullStack
+
+# Video Youtube:
+
+- https://youtu.be/K54ODLy_ZGQ
+
 # Frontend (React) – Esqueleto mínimo
 
 Este módulo implementa una interfaz web tipo Kanban para la gestión de tickets de soporte técnico. 
@@ -94,3 +102,8 @@ server: {
 Esto significa que desde el frontend puedes realizar llamadas como:
 
 fetch('/api/tickets/')  // Será redirigido automáticamente al backend
+
+# Mockups
+
+Ruta: docs\Mockups-capturas
+
