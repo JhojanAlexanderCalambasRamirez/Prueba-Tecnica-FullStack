@@ -8,7 +8,7 @@ const PRIORITY_LABELS = { baja: "Baja", media: "Media", alta: "Alta" };
 
 const NEXTS = {
   nuevo: ["en_proceso"],
-  en_proceso: ["resuelto"],
+  en_proceso: ["nuevo", "resuelto"],
   resuelto: ["cerrado"],
   cerrado: [],
 };
@@ -21,6 +21,7 @@ export default function TicketCard({ ticket, onChanged, onError, onOpen, onDelet
   const [comment, setComment] = useState("");
 
   async function doTransition(next) {
+    if (next === ticket.status) return;
     try {
       setBusy(true);
       await transitionTicket(ticket.id, next);

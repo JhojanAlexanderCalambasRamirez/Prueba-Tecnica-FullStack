@@ -8,7 +8,7 @@ from .models import Ticket, Comment
 
 VALID_TRANSITIONS = {
     Ticket.Status.NEW: {Ticket.Status.IN_PROGRESS},
-    Ticket.Status.IN_PROGRESS: {Ticket.Status.RESOLVED},
+    Ticket.Status.IN_PROGRESS: {Ticket.Status.NEW,Ticket.Status.RESOLVED},
     Ticket.Status.RESOLVED: {Ticket.Status.CLOSED},
     Ticket.Status.CLOSED: set(),
 }
