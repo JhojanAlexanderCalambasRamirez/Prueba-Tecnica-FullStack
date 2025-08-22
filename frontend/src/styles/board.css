@@ -1,7 +1,7 @@
 :root {
   --border: #e5e7eb;   
   --bg: #ffffff;      
-  --radius: 22px;      
+  --radius: 10px;      
   --space-3: 5px;    
 }
 
@@ -51,25 +51,24 @@
   margin: 8px 0;
 }
 
-/* Contenedor de columnas */
 .board__columns {
   display: grid;
   grid-template-columns: repeat(4, minmax(280px, 1fr));
-  gap: 0; /* importante: sin espacio entre columnas */
-  border: 1px solid var(--border);
+  gap: 0; 
+  border: 0.5px solid var(--border);
   border-radius: var(--radius);
   overflow: hidden;
-  background: var(--border); /* opcional: de fondo para que las líneas se vean */
+  background: transparent;
 }
 
-/* Cada columna */
 .board__columns > .column {
   padding: var(--space-3);
   background: var(--bg);
-  border-right: 1px solid var(--border);
+  border-right: 3px solid var(--border); /*esto para la linea entre las columnas, entre mayor sea el numero, mas gruesa va a ser*/
 }
 
-/* Quitamos la línea en la última columna */
+
 .board__columns > .column:last-child {
   border-right: none;
 }
+

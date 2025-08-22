@@ -73,7 +73,7 @@ export default function TicketDetail() {
     }
     try {
       setBusy(true);
-      await addTicketComment(id, { author: "Frontend", text });
+      await addTicketComment(id, { author: "TI", text });
       setComment("");
       await load();
     } catch (e) {
@@ -156,7 +156,7 @@ export default function TicketDetail() {
               onClick={() => doTransition(n)}
               disabled={busy}
             >
-              → {n.replace("_", " ")}
+              {n.replace("_", " ")}
             </button>
           ))}
         </div>

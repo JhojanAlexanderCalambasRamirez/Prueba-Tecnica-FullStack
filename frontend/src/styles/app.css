@@ -27,6 +27,11 @@
   text-decoration: none;
   color: #000000;
   font-weight: 600;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.app__nav a:hover {
+  transform: scale(1.1);
 }
 
 .app__nav a:hover {

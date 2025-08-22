@@ -16,8 +16,7 @@ export default function App() {
         </h1>
 
         <nav className="app__nav">
-          <Link to="/">Tablero</Link>
-          <Link to="/new">Nuevo ticket</Link>
+          <Link to="/new">+ Crear ticket</Link>
         </nav>
       </header>
 

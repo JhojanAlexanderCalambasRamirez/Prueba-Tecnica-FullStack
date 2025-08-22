@@ -42,8 +42,6 @@ export default function Board() {
 
   return (
     <div className="board">
-      <h2 className="board__title">Tablero</h2>
-
       <div className="board__filters">
         <input
           placeholder="Buscar por título…"
@@ -70,13 +68,12 @@ export default function Board() {
           <option value="cerrado">Cerrado</option>
         </select>
         <button onClick={() => setFilters({ search: "", priority: "", status: "" })} className="board__button">
-          Limpiar
+          Limpiar buscador
         </button>
       </div>
 
       {loading && <p className="board__loading">Cargando…</p>}
 
-      {/* Kanban */}
       <div className="board__columns">
         <Column title="Nuevo" tickets={byStatus.nuevo}>
           {byStatus.nuevo.map((t) => (
@@ -99,8 +96,6 @@ export default function Board() {
           ))}
         </Column>
       </div>
-
-      <hr className="board__separator" />
     </div>
   );
 }

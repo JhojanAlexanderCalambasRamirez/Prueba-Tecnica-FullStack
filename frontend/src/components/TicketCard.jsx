@@ -80,7 +80,7 @@ export default function TicketCard({ ticket, onChanged, onOpen }) {
               onClick={(ev) => doTransition(n, ev)}
               className="btn btn--light"
             >
-              → {n.replace("_", " ")}
+              {n.replace("_", " ")}
             </button>
           ))}
         </div>

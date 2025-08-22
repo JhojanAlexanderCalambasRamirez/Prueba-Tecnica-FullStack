@@ -15,6 +15,7 @@
   border-radius: 6px;
   border: 1px solid #000000;
   font-size: 14px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .new-ticket__form textarea {
@@ -38,4 +39,11 @@
 
 .new-ticket__buttons button:hover {
   background: #e7e7e7;
+}
+
+.new-ticket__form input:hover,
+.new-ticket__form textarea:hover,
+.new-ticket__form select:hover {
+  transform: scale(1.001);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
 }

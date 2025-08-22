@@ -1,6 +1,7 @@
 .column {
   min-width: 280px;
-  margin-right: 12px;
+  margin-right: 0;    
+  box-sizing: border-box;
 }
 
 .column__title {
