@@ -27,6 +27,15 @@ export default function App() {
           <Route path="/tickets/:id" element={<TicketDetail />} />
         </Routes>
       </main>
+
+      <footer>
+        <p>
+          © 2025 <a href="https://github.com/JhojanAlexanderCalambasRamirez/Prueba-Tecnica-FullStack" target="_blank" rel="noopener noreferrer">
+            Developer Alexander Calambas
+          </a> – Todos los derechos reservados.
+        </p>
+      </footer>
     </div>
+    
   );
 }

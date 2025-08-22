@@ -43,3 +43,10 @@
 .app__main {
   margin-top: 12px;
 }
+
+footer {
+  opacity: 0.2;
+  margin-top: 12px;
+  padding: 12px;
+  text-align: center;
+}
