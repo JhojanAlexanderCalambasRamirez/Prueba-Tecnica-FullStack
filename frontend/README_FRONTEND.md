@@ -66,6 +66,8 @@ Se pueden añadir comentarios a cada ticket desde el detalle o desde la tarjeta 
 
 - npm install react-router-dom react-icons
 
+- npm install js-cookie
+
 - Ejecuta el entorno de desarrollo: npm run dev
 
 # Acceso a la aplicación:

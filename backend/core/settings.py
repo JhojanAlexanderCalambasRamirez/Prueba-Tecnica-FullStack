@@ -8,6 +8,17 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # En producción se debe cargar desde variables de entorno.
 SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "dev-secret-key")
 
+# debes decirle a Django que confíe en las solicitudes que vienen de tu frontend. 
+# Esto se hace en el archivo de configuración de Django, settings.py:
+CORS_ALLOWED_ORIGINS = [
+    "http://127.0.0.1:5173",
+    "http://localhost:5173",
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    "http://127.0.0.1:5173",
+]
+
 # DEBUG: solo debe estar en True durante desarrollo.
 # En producción usar siempre False.
 DEBUG = os.getenv("DJANGO_DEBUG", "1") == "1"
