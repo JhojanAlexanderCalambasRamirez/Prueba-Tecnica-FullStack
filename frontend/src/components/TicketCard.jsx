@@ -2,16 +2,21 @@ import React, { useState } from "react";
 import { transitionTicket, addTicketComment } from "../api/tickets";
 import { FaTrashAlt, FaRegEdit } from "react-icons/fa";
 import "../styles/ticket-card.css";
+import "../styles/ticket.css";
 
 const PRIORITY_LABELS = { baja: "Baja", media: "Media", alta: "Alta" };
+
 const NEXTS = {
   nuevo: ["en_proceso"],
-  en_proceso: ["resuelto"],   
+  en_proceso: ["resuelto"],
   resuelto: ["cerrado"],
   cerrado: [],
 };
+function prettyStatus(s) {
+  return s.replace("_", " ");
+}
 
-export default function TicketCard({ ticket, onChanged, onOpen, onDelete, onError }) {
+export default function TicketCard({ ticket, onChanged, onError, onOpen, onDelete }) {
   const [busy, setBusy] = useState(false);
   const [comment, setComment] = useState("");
 
@@ -19,9 +24,9 @@ export default function TicketCard({ ticket, onChanged, onOpen, onDelete, onErro
     try {
       setBusy(true);
       await transitionTicket(ticket.id, next);
-      onChanged?.(`Estado actualizado → ${next.replace("_", " ")}`);
+      onChanged?.(`Ticket #${ticket.id}: estado → ${prettyStatus(next)}`);
     } catch (e) {
-      alert(e?.response?.data?.detail || e.message);
+      onError?.(e?.response?.data?.detail || e.message);
     } finally {
       setBusy(false);
     }
@@ -29,14 +34,15 @@ export default function TicketCard({ ticket, onChanged, onOpen, onDelete, onErro
 
   async function submitComment(e) {
     e.preventDefault();
-    if (!comment.trim()) return;
+    const text = comment.trim();
+    if (!text) return;
     try {
       setBusy(true);
-      await addTicketComment(ticket.id, { author: "TI", text: comment.trim() });
+      await addTicketComment(ticket.id, { author: "TI", text });
       setComment("");
-      onChanged?.();
+      onChanged?.(`Comentario agregado al ticket #${ticket.id}`);
     } catch (e) {
-      alert(e?.response?.data?.detail || e.message);
+      onError?.(e?.response?.data?.detail || e.message);
     } finally {
       setBusy(false);
     }
@@ -82,7 +88,7 @@ export default function TicketCard({ ticket, onChanged, onOpen, onDelete, onErro
 
       <div className="ticket__info">
         <div><b>Prioridad:</b> {PRIORITY_LABELS[ticket.priority]}</div>
-        <div><b>Estado:</b> {ticket.status.replace("_", " ")}</div>
+        <div><b>Estado:</b> {prettyStatus(ticket.status)}</div>
         <div className="ticket__reporter">
           <b>Reportado por:</b> {ticket.reporter_name}
           {ticket.reporter_email ? ` · ${ticket.reporter_email}` : ""}
@@ -98,7 +104,7 @@ export default function TicketCard({ ticket, onChanged, onOpen, onDelete, onErro
               onClick={() => doTransition(n)}
               className="ticket__btn"
             >
-              {n.replace("_", " ")}
+              {prettyStatus(n)}
             </button>
           ))}
         </div>

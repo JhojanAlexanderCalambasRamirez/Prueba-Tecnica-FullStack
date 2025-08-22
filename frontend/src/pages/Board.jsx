@@ -9,7 +9,11 @@ import "../styles/board.css";
 
 export default function Board() {
   const [tickets, setTickets] = useState([]);
-  const [filters, setFilters] = useState({ search: "", priority: "", status: "" });
+  const [filters, setFilters] = useState({
+    search: "",
+    priority: "",
+    status: "",
+  });
 
   // estado de UI visible (carga/éxito/error)
   const [ui, setUi] = useState({ loading: false, success: "", error: "" });
@@ -17,10 +21,18 @@ export default function Board() {
   const navigate = useNavigate();
 
   // helpers para el estado visible
-  function setLoading(v) { setUi({ loading: v, success: "", error: "" }); }
-  function ok(msg)     { setUi({ loading: false, success: msg, error: "" }); }
-  function fail(msg)   { setUi({ loading: false, success: "", error: msg }); }
-  function clearMsg()  { setUi((p) => ({ ...p, success: "", error: "" })); }
+  function setLoading(v) {
+    setUi({ loading: v, success: "", error: "" });
+  }
+  function ok(msg) {
+    setUi({ loading: false, success: msg, error: "" });
+  }
+  function fail(msg) {
+    setUi({ loading: false, success: "", error: msg });
+  }
+  function clearMsg() {
+    setUi((p) => ({ ...p, success: "", error: "" }));
+  }
 
   async function load() {
     try {
@@ -39,7 +51,8 @@ export default function Board() {
   }
 
   async function handleDelete(id) {
-    if (!confirm("¿Eliminar este ticket? Esta acción no se puede deshacer.")) return;
+    if (!confirm("¿Eliminar este ticket? Esta acción no se puede deshacer."))
+      return;
     try {
       setLoading(true);
       await deleteTicket(id);
@@ -50,7 +63,9 @@ export default function Board() {
     }
   }
 
-  useEffect(() => { load(); /* eslint-disable-next-line */ }, [filters]);
+  useEffect(() => {
+    load(); /* eslint-disable-next-line */
+  }, [filters]);
 
   const byStatus = useMemo(() => {
     const groups = { nuevo: [], en_proceso: [], resuelto: [], cerrado: [] };
@@ -70,11 +85,15 @@ export default function Board() {
       <div className="board__filters">
         <input
           placeholder="Buscar por título…"
-          onChange={(e) => setFilters((f) => ({ ...f, search: e.target.value }))}
+          onChange={(e) =>
+            setFilters((f) => ({ ...f, search: e.target.value }))
+          }
           className="board__search"
         />
         <select
-          onChange={(e) => setFilters((f) => ({ ...f, priority: e.target.value }))}
+          onChange={(e) =>
+            setFilters((f) => ({ ...f, priority: e.target.value }))
+          }
           className="board__select"
         >
           <option value="">Todas las prioridades</option>
@@ -83,7 +102,9 @@ export default function Board() {
           <option value="alta">Alta</option>
         </select>
         <select
-          onChange={(e) => setFilters((f) => ({ ...f, status: e.target.value }))}
+          onChange={(e) =>
+            setFilters((f) => ({ ...f, status: e.target.value }))
+          }
           className="board__select"
         >
           <option value="">Todos los estados</option>
@@ -109,7 +130,10 @@ export default function Board() {
             <TicketCard
               key={t.id}
               ticket={t}
-              onChanged={() => { load(); ok("Acción realizada correctamente"); }}
+              onChanged={() => {
+                load();
+                ok("Acción realizada correctamente");
+              }}
               onError={(msg) => fail(msg)}
               onOpen={openDetail}
               onDelete={handleDelete}
@@ -118,25 +142,30 @@ export default function Board() {
         </Column>
 
         <Column title="En Proceso" tickets={byStatus.en_proceso}>
-  {byStatus.en_proceso.map((t) => (
-    <TicketCard
-      key={t.id}
-      ticket={t}
-      onChanged={() => { load(); ok("Acción realizada correctamente"); }}
-      onError={(msg) => fail(msg)} 
-      onOpen={openDetail}
-      onDelete={handleDelete}
-    />
-  ))}
-</Column>
-
+          {byStatus.en_proceso.map((t) => (
+            <TicketCard
+              key={t.id}
+              ticket={t}
+              onChanged={() => {
+                load();
+                ok("Acción realizada correctamente");
+              }}
+              onError={(msg) => fail(msg)}
+              onOpen={openDetail}
+              onDelete={handleDelete}
+            />
+          ))}
+        </Column>
 
         <Column title="Resuelto" tickets={byStatus.resuelto}>
           {byStatus.resuelto.map((t) => (
             <TicketCard
               key={t.id}
               ticket={t}
-              onChanged={() => { load(); ok("Acción realizada correctamente"); }}
+              onChanged={() => {
+                load();
+                ok("Acción realizada correctamente");
+              }}
               onError={(msg) => fail(msg)}
               onOpen={openDetail}
               onDelete={handleDelete}
@@ -149,7 +178,10 @@ export default function Board() {
             <TicketCard
               key={t.id}
               ticket={t}
-              onChanged={() => { load(); ok("Acción realizada correctamente"); }}
+              onChanged={() => {
+                load();
+                ok("Acción realizada correctamente");
+              }}
               onError={(msg) => fail(msg)}
               onOpen={openDetail}
               onDelete={handleDelete}
