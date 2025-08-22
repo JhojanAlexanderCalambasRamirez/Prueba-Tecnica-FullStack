@@ -47,8 +47,10 @@
 }
 
 footer {
-  opacity: 0.2;
+  opacity: 0.1;
   margin-top: 12px;
   padding: 12px;
   text-align: center;
+  font-size: 13px;
+  color: #888888;
 }
