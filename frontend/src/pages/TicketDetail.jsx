@@ -129,7 +129,7 @@ export default function TicketDetail() {
 
       <h2 className="ticket-detail__title">{ticket.title}</h2>
       <p className="muted">
-        Creado: {new Date(ticket.created_at).toLocaleString()} · Última act.:{" "}
+        Creado: {new Date(ticket.created_at).toLocaleString()} · Última actividad:{" "}
         {new Date(ticket.updated_at).toLocaleString()}
       </p>
 

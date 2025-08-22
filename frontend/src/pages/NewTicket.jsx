@@ -35,8 +35,8 @@ export default function NewTicket() {
           <option value="media">Media</option>
           <option value="alta">Alta</option>
         </select>
-        <input name="reporter_name" placeholder="Solicitante *" />
-        <input name="reporter_email" placeholder="Correo (opcional)" />
+        <input name="reporter_name" placeholder="Solicitante" />
+        <input name="reporter_email" placeholder="Correo" />
         <div className="new-ticket__buttons">
           <button type="reset">Cancelar</button>
           <button type="submit">Crear</button>

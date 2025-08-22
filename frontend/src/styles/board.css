@@ -1,5 +1,12 @@
+:root {
+  --border: #e5e7eb;   
+  --bg: #ffffff;      
+  --radius: 22px;      
+  --space-3: 5px;    
+}
+
 .board {
-  padding: 16px;
+  padding: 1px;
 }
 
 .board__title {
@@ -44,28 +51,25 @@
   margin: 8px 0;
 }
 
-.board__columns{
-  display:grid;
-  grid-template-columns:repeat(4, minmax(280px,1fr));
-  gap:0; 
-  background:var(--border);
-  border-radius:var(--radius);
-  overflow:hidden;
+/* Contenedor de columnas */
+.board__columns {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(280px, 1fr));
+  gap: 0; /* importante: sin espacio entre columnas */
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--border); /* opcional: de fondo para que las líneas se vean */
 }
 
-.board__columns > .column{
-  padding:var(--space-3);
-  background:var(--bg);
-  border-right:1px solid var(--border);
+/* Cada columna */
+.board__columns > .column {
+  padding: var(--space-3);
+  background: var(--bg);
+  border-right: 1px solid var(--border);
 }
 
-.board__columns > .column:last-child{
-  border-right:none;
-}
-
-
-.board__separator {
-  margin: 16px 0;
-  border: none;
-  border-top: 1px solid #000000;
+/* Quitamos la línea en la última columna */
+.board__columns > .column:last-child {
+  border-right: none;
 }

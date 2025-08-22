@@ -13,7 +13,7 @@
 .new-ticket__form select {
   padding: 8px;
   border-radius: 6px;
-  border: 1px solid #ddd;
+  border: 1px solid #000000;
   font-size: 14px;
 }
 
@@ -31,11 +31,11 @@
 .new-ticket__buttons button {
   padding: 8px 12px;
   border-radius: 6px;
-  border: 1px solid #ddd;
+  border: 1px solid #000000;
   background: #f6f7f9;
   cursor: pointer;
 }
 
 .new-ticket__buttons button:hover {
-  background: #eceff3;
+  background: #e7e7e7;
 }

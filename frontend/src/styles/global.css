@@ -14,15 +14,6 @@ h2 {
   margin: 16px 0 8px 0;
 }
 
-a {
-  text-decoration: none;
-  color: #1976d2;
-}
-
-a:hover {
-  text-decoration: underline;
-}
-
 button {
   cursor: pointer;
   border: none;
@@ -31,6 +22,8 @@ button {
   background: #ffffff;
   color: #000000;
 }
+
+/*Boton de comentario*/
 
 button:hover {
   background: #dbdbdb;
