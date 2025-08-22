@@ -3,12 +3,17 @@ import { listTickets } from "../api/tickets";
 import Column from "../components/Column";
 import TicketCard from "../components/TicketCard";
 import { useNavigate } from "react-router-dom";
-import "../styles/board.css"; 
+import "../styles/board.css";
+import { deleteTicket } from "../api/tickets";
 
 export default function Board() {
   const [tickets, setTickets] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [filters, setFilters] = useState({ search: "", priority: "", status: "" });
+  const [filters, setFilters] = useState({
+    search: "",
+    priority: "",
+    status: "",
+  });
   const navigate = useNavigate();
 
   async function load() {
@@ -28,7 +33,20 @@ export default function Board() {
     }
   }
 
-  useEffect(() => { load(); }, [filters]);
+  async function handleDelete(id) {
+    if (!confirm("¿Eliminar este ticket? Esta acción no se puede deshacer."))
+      return;
+    try {
+      await deleteTicket(id);
+      await load();
+    } catch (e) {
+      alert(e?.response?.data?.detail || e.message);
+    }
+  }
+
+  useEffect(() => {
+    load();
+  }, [filters]);
 
   const byStatus = useMemo(() => {
     const groups = { nuevo: [], en_proceso: [], resuelto: [], cerrado: [] };
@@ -45,11 +63,15 @@ export default function Board() {
       <div className="board__filters">
         <input
           placeholder="Buscar por título…"
-          onChange={(e) => setFilters((f) => ({ ...f, search: e.target.value }))}
+          onChange={(e) =>
+            setFilters((f) => ({ ...f, search: e.target.value }))
+          }
           className="board__search"
         />
         <select
-          onChange={(e) => setFilters((f) => ({ ...f, priority: e.target.value }))}
+          onChange={(e) =>
+            setFilters((f) => ({ ...f, priority: e.target.value }))
+          }
           className="board__select"
         >
           <option value="">Todas las prioridades</option>
@@ -58,7 +80,9 @@ export default function Board() {
           <option value="alta">Alta</option>
         </select>
         <select
-          onChange={(e) => setFilters((f) => ({ ...f, status: e.target.value }))}
+          onChange={(e) =>
+            setFilters((f) => ({ ...f, status: e.target.value }))
+          }
           className="board__select"
         >
           <option value="">Todos los estados</option>
@@ -67,7 +91,10 @@ export default function Board() {
           <option value="resuelto">Resuelto</option>
           <option value="cerrado">Cerrado</option>
         </select>
-        <button onClick={() => setFilters({ search: "", priority: "", status: "" })} className="board__button">
+        <button
+          onClick={() => setFilters({ search: "", priority: "", status: "" })}
+          className="board__button"
+        >
           Limpiar buscador
         </button>
       </div>
@@ -77,22 +104,46 @@ export default function Board() {
       <div className="board__columns">
         <Column title="Nuevo" tickets={byStatus.nuevo}>
           {byStatus.nuevo.map((t) => (
-            <TicketCard key={t.id} ticket={t} onChanged={load} onOpen={openDetail} />
+            <TicketCard
+              key={t.id}
+              ticket={t}
+              onChanged={load}
+              onOpen={openDetail}
+              onDelete={handleDelete}
+            />
           ))}
         </Column>
         <Column title="En Proceso" tickets={byStatus.en_proceso}>
           {byStatus.en_proceso.map((t) => (
-            <TicketCard key={t.id} ticket={t} onChanged={load} onOpen={openDetail} />
+            <TicketCard
+              key={t.id}
+              ticket={t}
+              onChanged={load}
+              onOpen={openDetail}
+              onDelete={handleDelete}
+            />
           ))}
         </Column>
         <Column title="Resuelto" tickets={byStatus.resuelto}>
           {byStatus.resuelto.map((t) => (
-            <TicketCard key={t.id} ticket={t} onChanged={load} onOpen={openDetail} />
+            <TicketCard
+              key={t.id}
+              ticket={t}
+              onChanged={load}
+              onOpen={openDetail}
+              onDelete={handleDelete}
+            />
           ))}
         </Column>
         <Column title="Cerrado" tickets={byStatus.cerrado}>
           {byStatus.cerrado.map((t) => (
-            <TicketCard key={t.id} ticket={t} onChanged={load} onOpen={openDetail} />
+            <TicketCard
+              key={t.id}
+              ticket={t}
+              onChanged={load}
+              onOpen={openDetail}
+              onDelete={handleDelete}
+            />
           ))}
         </Column>
       </div>

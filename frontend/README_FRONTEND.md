@@ -17,6 +17,7 @@ UI mínima tipo **kanban** para tickets. Permite:
 cd frontend
 npm install
 npm i react-router-dom
+npm i react-icons
 npm run dev
 
 - Aplicación en: http://127.0.0.1:5173
