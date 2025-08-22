@@ -4,10 +4,11 @@ import Board from "./pages/Board";
 import NewTicket from "./pages/NewTicket";
 import TicketDetail from "./pages/TicketDetail";
 import "./styles/app.css";
+import { Navigate } from "react-router-dom";
 
 export default function App() {
-  const location = useLocation();            // <- saber en qué ruta estamos
-  const isOnNew = location.pathname === "/new";
+  const location = useLocation();            
+  const isOnNew = location.pathname === "/tickets/new";
 
   return (
     <div className="app">
@@ -19,14 +20,15 @@ export default function App() {
         </h1>
 
         <nav className="app__nav">
-          {!isOnNew && <Link to="/new">+ Crear ticket</Link>}
+          {!isOnNew && <Link to="/tickets/new">+ Crear ticket</Link>}
         </nav>
       </header>
 
       <main className="app__main">
         <Routes>
-          <Route path="/" element={<Board />} />
-          <Route path="/new" element={<NewTicket />} />
+          <Route path="/" element={<Navigate to="/tickets" replace />} />
+          <Route path="/tickets" element={<Board />} />
+          <Route path="/tickets/new" element={<NewTicket />} />
           <Route path="/tickets/:id" element={<TicketDetail />} />
         </Routes>
       </main>

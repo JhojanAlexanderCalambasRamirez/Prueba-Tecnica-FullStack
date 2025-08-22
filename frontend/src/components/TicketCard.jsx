@@ -11,7 +11,7 @@ const NEXTS = {
   cerrado: [],
 };
 
-export default function TicketCard({ ticket, onChanged, onOpen, onDelete }) {
+export default function TicketCard({ ticket, onChanged, onOpen, onDelete, onError }) {
   const [busy, setBusy] = useState(false);
   const [comment, setComment] = useState("");
 
@@ -19,7 +19,7 @@ export default function TicketCard({ ticket, onChanged, onOpen, onDelete }) {
     try {
       setBusy(true);
       await transitionTicket(ticket.id, next);
-      onChanged?.();
+      onChanged?.(`Estado actualizado → ${next.replace("_", " ")}`);
     } catch (e) {
       alert(e?.response?.data?.detail || e.message);
     } finally {
@@ -32,7 +32,7 @@ export default function TicketCard({ ticket, onChanged, onOpen, onDelete }) {
     if (!comment.trim()) return;
     try {
       setBusy(true);
-      await addTicketComment(ticket.id, { author: "Frontend", text: comment.trim() });
+      await addTicketComment(ticket.id, { author: "TI", text: comment.trim() });
       setComment("");
       onChanged?.();
     } catch (e) {
